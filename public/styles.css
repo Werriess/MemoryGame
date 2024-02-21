@@ -1,0 +1,78 @@
+:root {
+    --lightGrey: rgba(217, 217, 217, 1);
+    --darkGrey: rgba(104, 104, 104, 1);
+    --orange: rgba(250, 167, 6, 1);
+    --gameOrange: rgba(255, 194, 74, 1);
+    --red: rgba(243, 0, 0, 1);
+    --gameRed:rgba(255, 60, 60, 1);
+    --blue: rgba(0, 54, 243, 1);
+    --gameBlue: rgba(71, 112, 255, 1);
+    --green: rgba(107, 243, 0, 1);
+    --gameGreen: rgba(167, 253, 100, 1);
+    --myFont: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    margin: 0px auto;
+    background-color: var(--lightGrey);
+}
+
+#header {
+    background-color: var(--darkGrey);
+    display: flex;
+    justify-content: center;
+    padding: 2.5rem;
+}
+
+h1 {
+    margin: 0rem;
+    color: white;
+    font-family: var(--myFont);
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    padding-top: 5rem;
+}
+
+#game {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+#game-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#startGame {
+    margin-top: 1rem;
+    background-color: var(--lightGrey);
+    color: black;
+    padding: 0.25rem;
+}
+
+.oranges {
+    background-color: var(--orange);
+}
+
+.reds {
+    background-color: var(--red);
+}
+
+.blues {
+    background-color: var(--blue);
+}
+
+.greens {
+    background-color: var(--green);
+}
+
+.grid-item {
+    padding: 3.5rem;
+    border-radius: 5rem;
+}
