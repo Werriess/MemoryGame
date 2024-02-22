@@ -1,4 +1,4 @@
-console.log("Js is connected")
+console.log("Js is connected");
 const startGame = document.querySelector("#startGame");
 const orangeOne = document.querySelector("#orangeOne");
 const orangeTwo = document.querySelector("#orangeTwo");
@@ -11,102 +11,159 @@ const greenOne = document.querySelector("#greenOne");
 const greenTwo = document.querySelector("#greenTwo");
 let gameCount = 1;
 
-
 function changeOrange(whichOrange) {
-    whichOrange.style.backgroundColor = "rgba(255, 194, 74, 1)";
-    setTimeout( () => {
-        whichOrange.style.backgroundColor =  "rgba(250, 167, 6, 1)";
-    }, 500)
+  whichOrange.style.backgroundColor = "rgba(255, 194, 74, 1)";
+  setTimeout(() => {
+    whichOrange.style.backgroundColor = "rgba(250, 167, 6, 1)";
+  }, 500);
 }
 
 function changeBlue(whichBlue) {
-    whichBlue.style.backgroundColor = "rgba(71, 112, 255, 1)";
-    setTimeout( () => {
-        whichBlue.style.backgroundColor =  "rgba(0, 54, 243, 1";
-    }, 500)
+  whichBlue.style.backgroundColor = "rgba(71, 112, 255, 1)";
+  setTimeout(() => {
+    whichBlue.style.backgroundColor = "rgba(0, 54, 243, 1";
+  }, 500);
 }
 
 function changeGreen(whichGreen) {
-    whichGreen.style.backgroundColor = "rgba(167, 253, 100, 1)";
-    setTimeout( () => {
-        whichGreen.style.backgroundColor =  "rgba(107, 243, 0, 1";
-    }, 500)
+  whichGreen.style.backgroundColor = "rgba(167, 253, 100, 1)";
+  setTimeout(() => {
+    whichGreen.style.backgroundColor = "rgba(107, 243, 0, 1";
+  }, 500);
 }
 function changeRed(whichRed) {
-    whichRed.style.backgroundColor = "rgba(255, 60, 60, 1)";
-    setTimeout( () => {
-        whichRed.style.backgroundColor =  "rgba(243, 0, 0, 1)";
-    }, 500)
+  whichRed.style.backgroundColor = "rgba(255, 60, 60, 1)";
+  setTimeout(() => {
+    whichRed.style.backgroundColor = "rgba(243, 0, 0, 1)";
+  }, 500);
 }
 
 const functionsArray = [changeBlue, changeOrange, changeRed, changeGreen];
 let lightArray = [];
 
-function playGame(orange, blue, red, green, orangeTwo, blueTwo, blueThree, redTwo, greenTwo) {
-    let answer = Math.floor(Math.random() * 4);
-    if(answer == 0) {
-        let newBlue = Math.floor(Math.random() * 3);
-        if(newBlue == 0) {
-            functionsArray[0](blue);
-            lightArray.push(3);
-        }
-        else if(newBlue == 1) {
-            functionsArray[0](blueTwo);
-            lightArray.push(4);
-        }
-        else {
-            functionsArray[0](blueThree);
-            lightArray.push(8)
-        }
+function playGame(
+  orange,
+  blue,
+  red,
+  green,
+  orangeTwo,
+  blueTwo,
+  blueThree,
+  redTwo,
+  greenTwo
+) {
+  let answer = Math.floor(Math.random() * 4);
+  if (answer == 0) {
+    let newBlue = Math.floor(Math.random() * 3);
+    if (newBlue == 0) {
+      functionsArray[0](blue);
+      lightArray.push(3);
+    } else if (newBlue == 1) {
+      functionsArray[0](blueTwo);
+      lightArray.push(4);
+    } else {
+      functionsArray[0](blueThree);
+      lightArray.push(8);
     }
-    else if(answer == 1) {
-        let newOrange = Math.floor(Math.random());
-        if(newOrange == 0) {
-            functionsArray[1](orange);
-            lightArray.push(1);
-        }
-        else {
-            functionsArray[1](orangeTwo);
-            lightArray.push(6);
-        }  
+  } else if (answer == 1) {
+    let newOrange = Math.floor(Math.random());
+    if (newOrange == 0) {
+      functionsArray[1](orange);
+      lightArray.push(1);
+    } else {
+      functionsArray[1](orangeTwo);
+      lightArray.push(6);
     }
-    else if(answer == 2) {
-        let newRed = Math.floor(Math.random());
-        if(newRed == 0) {
-            functionsArray[2](red);
-            lightArray.push(2);
-        }
-        else {
-            functionsArray[2](redTwo);
-            lightArray.push(7);
-        }
+  } else if (answer == 2) {
+    let newRed = Math.floor(Math.random());
+    if (newRed == 0) {
+      functionsArray[2](red);
+      lightArray.push(2);
+    } else {
+      functionsArray[2](redTwo);
+      lightArray.push(7);
     }
-    else {
-        let newGreen = Math.floor(Math.random());
-        if(newGreen == 0) {
-            functionsArray[3](green);
-            lightArray.push(5);
-        }
-        else {
-            functionsArray[3](greenTwo);
-            lightArray.push(9);
-        }
+  } else {
+    let newGreen = Math.floor(Math.random());
+    if (newGreen == 0) {
+      functionsArray[3](green);
+      lightArray.push(5);
+    } else {
+      functionsArray[3](greenTwo);
+      lightArray.push(9);
     }
+  }
 }
 
-startGame.addEventListener('click', () => {
-    for(let i = 0; i < gameCount; i++) {
-        setTimeout( () => {
-            playGame(orangeOne, blueOne, redOne, greenOne, orangeTwo, blueTwo, blueThree, redTwo, greenTwo)
-        }, i * 1000);
+let userChoiceArr = [];
+
+function getUserInput() {
+  orangeOne.addEventListener("click", () => {
+    userChoiceArr.push(orangeOne.value);
+  });
+  orangeTwo.addEventListener("click", () => {
+    userChoiceArr.push(orangeTwo.value);
+  });
+  redOne.addEventListener("click", () => {
+    userChoiceArr.push(redOne.value);
+  });
+  redTwo.addEventListener("click", () => {
+    userChoiceArr.push(redTwo.value);
+  });
+  blueOne.addEventListener("click", () => {
+    userChoiceArr.push(blueOneOne.value);
+  });
+  blueTwo.addEventListener("click", () => {
+    userChoiceArr.push(blueTwo.value);
+  });
+  blueThree.addEventListener("click", () => {
+    userChoiceArr.push(blueThree.value);
+  });
+  greenOne.addEventListener("click", () => {
+    userChoiceArr.push(greenOne.value);
+  });
+  greenTwo.addEventListener("click", () => {
+    userChoiceArr.push(greenTwo.value);
+  });
+}
+
+function validateSequence(arrOne, arrTwo) {
+    if (arrOne.length !== arrTwo.length) {
+      console.log("Sorry game over!");
+      return false;
     }
-    lightArray.forEach((light, index) => {
-        console.log(`Index ${index}: ${light}`);
-    });
+  
+    for (let i = 0; i < arrOne.length; i++) {
+      if (arrOne[i] !== arrTwo[i]) {
+        console.log("Sorry game over!");
+        return false;
+      }
+    }
+  
+    return true;
+  }
+
+startGame.addEventListener("click", () => {
+    for (let i = 0; i < gameCount; i++) {
+      setTimeout(() => {
+        playGame(
+          orangeOne,
+          blueOne,
+          redOne,
+          greenOne,
+          orangeTwo,
+          blueTwo,
+          blueThree,
+          redTwo,
+          greenTwo
+        );
+      }, i * 1000);
+    }
+  lightArray.forEach((light, index) => {
+    console.log(`Index ${index}: ${light}`);
     gameCount++;
+  });
 });
-
-
 
 //map die divs wat flicker
 //vergelyk met users input
