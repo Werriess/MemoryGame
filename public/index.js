@@ -40,6 +40,7 @@ function changeRed(whichRed) {
 }
 
 const functionsArray = [changeBlue, changeOrange, changeRed, changeGreen];
+let lightArray = [];
 
 function playGame(orange, blue, red, green, orangeTwo, blueTwo, blueThree, redTwo, greenTwo) {
     let answer = Math.floor(Math.random() * 4);
@@ -47,39 +48,48 @@ function playGame(orange, blue, red, green, orangeTwo, blueTwo, blueThree, redTw
         let newBlue = Math.floor(Math.random() * 3);
         if(newBlue == 0) {
             functionsArray[0](blue);
+            lightArray.push(3);
         }
         else if(newBlue == 1) {
-            functionsArray[0](blueTwo)
+            functionsArray[0](blueTwo);
+            lightArray.push(4);
         }
         else {
             functionsArray[0](blueThree);
+            lightArray.push(8)
         }
     }
     else if(answer == 1) {
         let newOrange = Math.floor(Math.random());
         if(newOrange == 0) {
             functionsArray[1](orange);
+            lightArray.push(1);
         }
         else {
             functionsArray[1](orangeTwo);
+            lightArray.push(6);
         }  
     }
     else if(answer == 2) {
         let newRed = Math.floor(Math.random());
         if(newRed == 0) {
             functionsArray[2](red);
+            lightArray.push(2);
         }
         else {
             functionsArray[2](redTwo);
+            lightArray.push(7);
         }
     }
     else {
         let newGreen = Math.floor(Math.random());
         if(newGreen == 0) {
             functionsArray[3](green);
+            lightArray.push(5);
         }
         else {
-            functionsArray[3](greenTwo)
+            functionsArray[3](greenTwo);
+            lightArray.push(9);
         }
     }
 }
@@ -90,5 +100,15 @@ startGame.addEventListener('click', () => {
             playGame(orangeOne, blueOne, redOne, greenOne, orangeTwo, blueTwo, blueThree, redTwo, greenTwo)
         }, i * 1000);
     }
+    lightArray.forEach((light, index) => {
+        console.log(`Index ${index}: ${light}`);
+    });
     gameCount++;
 });
+
+
+
+//map die divs wat flicker
+//vergelyk met users input
+//set timer
+//indien reg, gaan aan na volgende level
