@@ -9,7 +9,8 @@ const redOne = document.querySelector("#redOne");
 const redTwo = document.querySelector("#redTwo");
 const greenOne = document.querySelector("#greenOne");
 const greenTwo = document.querySelector("#greenTwo");
-let gameCount = 1;
+let iterator = 1;
+let gameCount = 0;
 
 function changeOrange(whichOrange) {
   whichOrange.style.backgroundColor = "rgba(255, 194, 74, 1)";
@@ -21,14 +22,14 @@ function changeOrange(whichOrange) {
 function changeBlue(whichBlue) {
   whichBlue.style.backgroundColor = "rgba(71, 112, 255, 1)";
   setTimeout(() => {
-    whichBlue.style.backgroundColor = "rgba(0, 54, 243, 1";
+    whichBlue.style.backgroundColor = "rgba(0, 54, 243, 1)";
   }, 500);
 }
 
 function changeGreen(whichGreen) {
   whichGreen.style.backgroundColor = "rgba(167, 253, 100, 1)";
   setTimeout(() => {
-    whichGreen.style.backgroundColor = "rgba(107, 243, 0, 1";
+    whichGreen.style.backgroundColor = "rgba(107, 243, 0, 1)";
   }, 500);
 }
 function changeRed(whichRed) {
@@ -41,7 +42,7 @@ function changeRed(whichRed) {
 const functionsArray = [changeBlue, changeOrange, changeRed, changeGreen];
 let lightArray = [];
 
-function playGame(
+function generateSequence(
   orange,
   blue,
   red,
@@ -66,7 +67,7 @@ function playGame(
       lightArray.push(8);
     }
   } else if (answer == 1) {
-    let newOrange = Math.floor(Math.random());
+    let newOrange = Math.round(Math.random());
     if (newOrange == 0) {
       functionsArray[1](orange);
       lightArray.push(1);
@@ -75,7 +76,7 @@ function playGame(
       lightArray.push(6);
     }
   } else if (answer == 2) {
-    let newRed = Math.floor(Math.random());
+    let newRed = Math.round(Math.random());
     if (newRed == 0) {
       functionsArray[2](red);
       lightArray.push(2);
@@ -84,7 +85,7 @@ function playGame(
       lightArray.push(7);
     }
   } else {
-    let newGreen = Math.floor(Math.random());
+    let newGreen = Math.round(Math.random());
     if (newGreen == 0) {
       functionsArray[3](green);
       lightArray.push(5);
@@ -97,75 +98,115 @@ function playGame(
 
 let userChoiceArr = [];
 
-function getUserInput() {
-  orangeOne.addEventListener("click", () => {
-    userChoiceArr.push(orangeOne.value);
-  });
-  orangeTwo.addEventListener("click", () => {
-    userChoiceArr.push(orangeTwo.value);
-  });
-  redOne.addEventListener("click", () => {
-    userChoiceArr.push(redOne.value);
-  });
-  redTwo.addEventListener("click", () => {
-    userChoiceArr.push(redTwo.value);
-  });
-  blueOne.addEventListener("click", () => {
-    userChoiceArr.push(blueOneOne.value);
-  });
-  blueTwo.addEventListener("click", () => {
-    userChoiceArr.push(blueTwo.value);
-  });
-  blueThree.addEventListener("click", () => {
-    userChoiceArr.push(blueThree.value);
-  });
-  greenOne.addEventListener("click", () => {
-    userChoiceArr.push(greenOne.value);
-  });
-  greenTwo.addEventListener("click", () => {
-    userChoiceArr.push(greenTwo.value);
-  });
+function getUserInput(lightValue) {
+    userChoiceArr.push(parseInt(lightValue));
 }
 
 function validateSequence(arrOne, arrTwo) {
-    if (arrOne.length !== arrTwo.length) {
-      console.log("Sorry game over!");
-      return false;
-    }
-  
-    for (let i = 0; i < arrOne.length; i++) {
-      if (arrOne[i] !== arrTwo[i]) {
-        console.log("Sorry game over!");
-        return false;
-      }
-    }
-  
-    return true;
+  if (arrOne.length !== arrTwo.length) {
+    console.log("Sorry game over! Arrays have different lengths.");
+    return false;
   }
 
-startGame.addEventListener("click", () => {
-    for (let i = 0; i < gameCount; i++) {
-      setTimeout(() => {
-        playGame(
-          orangeOne,
-          blueOne,
-          redOne,
-          greenOne,
-          orangeTwo,
-          blueTwo,
-          blueThree,
-          redTwo,
-          greenTwo
-        );
-      }, i * 1000);
+  for (let i = 0; i < arrOne.length; i++) {
+    if (arrOne[i] !== arrTwo[i]) {
+      console.log("Sorry game over! Mismatch at index", i);
+      console.log("Expected:", arrOne[i]);
+      console.log("Actual:", arrTwo[i]);
+      console.log("arrOne:", arrOne);
+      console.log("arrTwo:", arrTwo);
+
+      return false;
     }
-  lightArray.forEach((light, index) => {
-    console.log(`Index ${index}: ${light}`);
-    gameCount++;
-  });
+  }
+
+  return true;
+}
+
+  orangeOne.addEventListener("click", () => {
+    getUserInput(orangeOne.getAttribute("data-value"));
+    
 });
+
+orangeTwo.addEventListener("click", () => {
+    getUserInput(orangeTwo.getAttribute("data-value"));
+    
+});
+
+redOne.addEventListener("click", () => {
+    getUserInput(redOne.getAttribute("data-value"));
+    
+});
+
+redTwo.addEventListener("click", () => {
+    getUserInput(redTwo.getAttribute("data-value"));
+    
+});
+
+blueOne.addEventListener("click", () => {
+    getUserInput(blueOne.getAttribute("data-value"));
+    
+});
+
+blueTwo.addEventListener("click", () => {
+    getUserInput(blueTwo.getAttribute("data-value"));
+    
+});
+
+blueThree.addEventListener("click", () => {
+    getUserInput(blueThree.getAttribute("data-value"));
+    
+});
+
+greenOne.addEventListener("click", () => {
+    getUserInput(greenOne.getAttribute("data-value"));
+    
+});
+
+greenTwo.addEventListener("click", () => {
+    getUserInput(greenTwo.getAttribute("data-value"));
+});
+
+
+startGame.addEventListener('click', () => {
+  startLevel();
+})
+
+function startLevel() {
+  for (let i = 0; i < iterator; i++) {
+    setTimeout(() => {
+      generateSequence(
+        orangeOne,
+        blueOne,
+        redOne,
+        greenOne,
+        orangeTwo,
+        blueTwo,
+        blueThree,
+        redTwo,
+        greenTwo
+      );
+    }, i * 1000);
+
+    setTimeout(() => {
+      if (validateSequence(lightArray, userChoiceArr)) {
+        console.log(true);
+      } else {
+        iterator = 0;
+      }
+      
+      lightArray = [];
+      userChoiceArr = [];
+    }, (i + 1) * 1000 + 5000);
+  }
+  iterator++;
+}
+
+
+
 
 //map die divs wat flicker
 //vergelyk met users input
 //set timer
 //indien reg, gaan aan na volgende level
+
